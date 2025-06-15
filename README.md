@@ -1,21 +1,25 @@
 <!DOCTYPE html>
-<html lang="en-US"><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17147516072">
-</script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-17147516072');
-</script>
+<html lang="en-US">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17147516072"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-17147516072');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Web Developer West Palm Beach | Palm Beach Websites - Transform Your Business Online</title>
     <meta name="description" content="Stop losing customers to outdated websites. Professional web development that makes you look as good as you are. Based in West Palm Beach, serving businesses everywhere. Call (561) 718-6725.">
     <meta name="keywords" content="web developer west palm beach, website design palm beach county, web development florida, professional websites, business transformation, web design services">
     <link rel="canonical" href="https://zacharyvorsteg.com">
+    
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     
     <!-- Open Graph -->
     <meta property="og:title" content="Palm Beach Websites - Your Website Should Work As Hard As You Do">
@@ -90,6 +94,7 @@
             --accent: #0066CC;
             --accent-hover: #0052A3;
             --success: #10B981;
+            --warning: #F59E0B;
             --error: #EF4444;
             --max-width: 1200px;
             --transition: cubic-bezier(0.4, 0, 0.2, 1);
@@ -108,16 +113,25 @@
             overflow-x: hidden;
         }
 
-        /* Typography */
+        /* Typography - Optimized */
         h1, h2, h3, h4, h5, h6 {
             font-weight: 600;
             letter-spacing: -0.02em;
             line-height: 1.2;
+            margin: 0;
+        }
+
+        /* Base Elements */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
         }
 
         /* Smooth Scrolling */
         html {
             scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
         }
 
         /* Selection */
@@ -227,7 +241,7 @@
             transform: translateY(-1px);
         }
 
-        /* Mobile Menu */
+        /* Mobile Menu Toggle */
         .mobile-menu-toggle {
             display: none;
             background: none;
@@ -247,8 +261,9 @@
             width: 24px;
             height: 2px;
             background: var(--black);
-            margin: 5px 0;
+            margin: 5px auto;
             transition: all 0.3s var(--transition);
+            position: relative;
         }
 
         .mobile-menu-toggle.active span:nth-child(1) {
@@ -263,10 +278,10 @@
             transform: rotate(-45deg) translate(7px, -6px);
         }
 
-        /* Mobile Menu Overlay */
+        /* Mobile Menu - FIXED */
         .mobile-menu {
             position: fixed;
-            top: 0;
+            top: 72px;
             left: 0;
             right: 0;
             bottom: 0;
@@ -274,9 +289,11 @@
             z-index: 999;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.3s var(--transition), visibility 0.3s var(--transition);
-            padding: 100px 24px 24px;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            padding: 24px;
             overflow-y: auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
         }
 
         .mobile-menu.active {
@@ -284,32 +301,65 @@
             visibility: visible;
         }
 
-        .mobile-menu nav {
+        @media (max-width: 768px) {
+            .mobile-menu {
+                top: 64px;
+                height: calc(100vh - 64px); /* Explicit height */
+            }
+        }
+
+        .mobile-nav {
+            display: flex;
             flex-direction: column;
-            gap: 24px;
-            align-items: flex-start;
+            gap: 8px;
+            opacity: 1;
+            visibility: visible;
         }
 
-        .mobile-menu nav a {
-            font-size: 24px;
-            font-weight: 600;
-            color: var(--black);
-            padding: 10px 0;
-            width: 100%;
-        }
-
-        .mobile-menu .header-cta {
-            margin-top: 32px;
-            display: inline-block;
+        .mobile-nav-link {
             font-size: 18px;
+            font-weight: 500;
+            color: var(--black);
+            padding: 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.2s ease, padding-left 0.2s ease;
+            background: transparent;
+            display: block;
+        }
+
+        .mobile-nav-link:hover,
+        .mobile-nav-link:active {
+            background: var(--gray-100);
+            padding-left: 24px;
+        }
+
+        .mobile-nav-cta {
+            margin-top: 24px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
             padding: 16px 32px;
+            background: var(--black);
+            color: var(--white);
+            border-radius: 6px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .mobile-nav-cta:hover,
+        .mobile-nav-cta:active {
+            background: var(--gray-800);
+            transform: translateY(-1px);
         }
 
         /* Hero Section */
         .hero {
-            padding: 160px 0 var(--section-padding);
+            padding: 140px 0 var(--section-padding);
             background: var(--white);
             overflow: hidden;
+            min-height: 600px;
         }
 
         .container {
@@ -338,7 +388,7 @@
         }
 
         .hero h1 {
-            font-size: clamp(32px, 6vw, 72px);
+            font-size: clamp(36px, 6vw, 72px);
             font-weight: 700;
             line-height: 1.1;
             letter-spacing: -0.04em;
@@ -427,6 +477,8 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+            overflow: hidden;
         }
 
         .btn-primary {
@@ -500,6 +552,276 @@
             color: var(--gray-600);
             text-transform: uppercase;
             letter-spacing: 0.05em;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: var(--section-padding) 0;
+            background: linear-gradient(to bottom, var(--white) 0%, var(--gray-100) 100%);
+            position: relative;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .pricing-header h2 {
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--black);
+        }
+
+        .pricing-header p {
+            font-size: clamp(16px, 2vw, 20px);
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 48px 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+            transition: transform 0.3s var(--transition), box-shadow 0.3s var(--transition), opacity 0.6s ease, border-color 0.3s var(--transition);
+            border: 2px solid transparent;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .pricing-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .pricing-card:nth-child(1) { transition-delay: 0.1s; }
+        .pricing-card:nth-child(2) { transition-delay: 0.2s; }
+        .pricing-card:nth-child(3) { transition-delay: 0.3s; }
+
+        .pricing-card.featured {
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-4px);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: var(--white);
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .pricing-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--black);
+        }
+
+        .pricing-price {
+            font-size: 48px;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .pricing-price span {
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--gray-600);
+        }
+
+        .pricing-description {
+            font-size: 16px;
+            color: var(--gray-600);
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .pricing-features li {
+            padding: 12px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 16px;
+            color: var(--gray-700);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features .check {
+            color: var(--success);
+            font-size: 20px;
+            flex-shrink: 0;
+            margin-top: -2px;
+        }
+
+        .pricing-cta {
+            width: 100%;
+            text-align: center;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .guarantee-section {
+            background: var(--gray-900);
+            color: var(--white);
+            padding: 60px 0;
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .guarantee-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .guarantee-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 24px;
+            border-radius: 100px;
+            margin-bottom: 24px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 14px;
+        }
+
+        .guarantee-title {
+            font-size: clamp(24px, 3vw, 36px);
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .guarantee-text {
+            font-size: 18px;
+            opacity: 0.9;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+        /* Social Proof Section */
+        .social-proof {
+            padding: 60px 0;
+            background: var(--white);
+            border-top: 1px solid var(--gray-200);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 40px;
+        }
+
+        .testimonial-card {
+            background: var(--gray-100);
+            padding: 32px;
+            border-radius: 12px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .testimonial-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s var(--transition);
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 16px;
+            left: 24px;
+            font-size: 60px;
+            color: var(--accent);
+            opacity: 0.2;
+            font-family: Georgia, serif;
+        }
+
+        .testimonial-text {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--gray-700);
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            background: var(--gray-300);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--gray-600);
+        }
+
+        .author-info h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 2px;
+        }
+
+        .author-info p {
+            font-size: 14px;
+            color: var(--gray-600);
+        }
+
+        .rating {
+            color: var(--warning);
+            margin-bottom: 12px;
         }
 
         /* Problem Section */
@@ -834,6 +1156,7 @@
             height: 240px;
             background: var(--gray-200);
             overflow: hidden;
+            aspect-ratio: 16 / 9;
         }
 
         .portfolio-content {
@@ -866,423 +1189,10 @@
             color: var(--accent-hover);
         }
 
-        /* Blog Section */
-        .blog-section {
-            padding: var(--section-padding) 0;
-            background: var(--white);
-        }
-
-        .blog-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .blog-header h2 {
-            font-size: clamp(28px, 4vw, 48px);
-            font-weight: 700;
-            margin-bottom: 16px;
-            color: var(--black);
-        }
-
-        .blog-header p {
-            font-size: clamp(16px, 2vw, 20px);
-            color: var(--gray-600);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 32px;
-            margin-bottom: 48px;
-        }
-
-        .blog-card {
-            background: var(--white);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s var(--transition);
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .blog-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .blog-card.expanded {
-            grid-column: 1 / -1;
-            max-width: 800px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .blog-image {
-            height: 220px;
-            background: var(--gray-200);
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            transition: height 0.3s var(--transition);
-        }
-
-        .blog-card.expanded .blog-image {
-            height: 280px;
-            opacity: 0.9;
-        }
-
-        .blog-category {
-            position: absolute;
-            top: 16px;
-            left: 16px;
-            background: var(--accent);
-            color: var(--white);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .blog-content {
-            padding: 32px;
-        }
-
-        .blog-date {
-            font-size: 14px;
-            color: var(--gray-500);
-            margin-bottom: 12px;
-        }
-
-        .blog-title {
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: var(--black);
-            line-height: 1.3;
-        }
-
-        .blog-card.expanded .blog-title {
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-
-        .blog-excerpt {
-            font-size: 16px;
-            color: var(--gray-600);
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .blog-full-content {
-            display: none;
-            font-size: 16px;
-            color: var(--gray-700);
-            line-height: 1.8;
-            margin-top: 24px;
-        }
-
-        .blog-card.expanded .blog-full-content {
-            display: block;
-            animation: fadeIn 0.4s ease;
-        }
-
-        .blog-full-content h4 {
-            font-size: 20px;
-            font-weight: 600;
-            margin: 24px 0 16px;
-            color: var(--black);
-        }
-
-        .blog-full-content p {
-            margin-bottom: 16px;
-        }
-
-        .blog-full-content ul {
-            margin: 16px 0 16px 24px;
-        }
-
-        .blog-full-content li {
-            margin-bottom: 8px;
-            color: var(--gray-700);
-        }
-
-        .blog-full-content .highlight {
-            background: var(--gray-100);
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-            border-left: 4px solid var(--accent);
-        }
-
-        .blog-toggle {
-            color: var(--accent);
-            background: none;
-            border: none;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 15px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
-            transition: gap 0.2s var(--transition);
-            padding: 8px 0;
-            min-height: 44px;
-        }
-
-        .blog-toggle:hover {
-            gap: 10px;
-        }
-
-        .blog-toggle svg {
-            transition: transform 0.3s var(--transition);
-        }
-
-        .blog-card.expanded .blog-toggle svg {
-            transform: rotate(180deg);
-        }
-
-        .blog-cta-box {
-            background: var(--gray-100);
-            padding: 24px;
-            border-radius: 8px;
-            margin-top: 32px;
-            text-align: center;
-            display: none;
-        }
-
-        .blog-card.expanded .blog-cta-box {
-            display: block;
-        }
-
-        .blog-cta-box h5 {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: var(--black);
-        }
-
-        .blog-cta-box p {
-            font-size: 16px;
-            color: var(--gray-600);
-            margin-bottom: 16px;
-        }
-
-        .blog-cta-section {
-            text-align: center;
-            margin-top: 60px;
-            padding: 48px;
-            background: var(--gray-100);
-            border-radius: 12px;
-        }
-
-        .blog-cta-section h3 {
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 16px;
-            color: var(--black);
-        }
-
-        .blog-cta-section p {
-            font-size: 18px;
-            color: var(--gray-600);
-            margin-bottom: 24px;
-        }
-
-        /* Pricing Section */
-        .pricing-section {
-            padding: var(--section-padding) 0;
-            background: linear-gradient(to bottom, var(--white) 0%, var(--gray-100) 100%);
-            position: relative;
-        }
-
-        .pricing-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .pricing-header h2 {
-            font-size: clamp(28px, 4vw, 48px);
-            font-weight: 700;
-            margin-bottom: 16px;
-            color: var(--black);
-        }
-
-        .pricing-header p {
-            font-size: clamp(16px, 2vw, 20px);
-            color: var(--gray-600);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .pricing-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 32px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .pricing-card {
-            background: var(--white);
-            border-radius: 16px;
-            padding: 48px 40px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            position: relative;
-            transition: all 0.3s var(--transition);
-            border: 2px solid transparent;
-        }
-
-        .pricing-card.featured {
-            border-color: var(--accent);
-            transform: scale(1.05);
-            animation: subtleGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes subtleGlow {
-            0%, 100% {
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            }
-            50% {
-                box-shadow: 0 8px 30px rgba(0, 102, 204, 0.2);
-            }
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
-        }
-
-        .pricing-card.featured:hover {
-            transform: scale(1.05) translateY(-4px);
-        }
-
-        .pricing-badge {
-            position: absolute;
-            top: -14px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--accent);
-            color: var(--white);
-            padding: 6px 20px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .pricing-title {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: var(--black);
-        }
-
-        .pricing-price {
-            font-size: 48px;
-            font-weight: 600;
-            color: var(--black);
-            margin-bottom: 8px;
-            letter-spacing: -0.02em;
-        }
-
-        .pricing-price span {
-            font-size: 20px;
-            font-weight: 400;
-            color: var(--gray-600);
-        }
-
-        .pricing-description {
-            font-size: 16px;
-            color: var(--gray-600);
-            margin-bottom: 32px;
-            line-height: 1.6;
-        }
-
-        .pricing-features {
-            list-style: none;
-            margin-bottom: 40px;
-        }
-
-        .pricing-features li {
-            padding: 12px 0;
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            font-size: 16px;
-            color: var(--gray-700);
-            border-bottom: 1px solid var(--gray-200);
-        }
-
-        .pricing-features li:last-child {
-            border-bottom: none;
-        }
-
-        .pricing-features .check {
-            color: var(--success);
-            font-size: 20px;
-            flex-shrink: 0;
-            margin-top: -2px;
-        }
-
-        .pricing-cta {
-            width: 100%;
-            text-align: center;
-            padding: 16px;
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        .guarantee-section {
-            background: var(--gray-900);
-            color: var(--white);
-            padding: 60px 0;
-            margin-top: 80px;
-            text-align: center;
-        }
-
-        .guarantee-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .guarantee-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 12px 24px;
-            border-radius: 100px;
-            margin-bottom: 24px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-size: 14px;
-        }
-
-        .guarantee-title {
-            font-size: clamp(24px, 3vw, 36px);
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-
-        .guarantee-text {
-            font-size: 18px;
-            opacity: 0.9;
-            line-height: 1.6;
-            margin-bottom: 32px;
-        }
-
         /* Process Section */
         .process {
             padding: var(--section-padding) 0;
-            background: var(--white);
+            background: var(--gray-100);
         }
 
         .process-timeline {
@@ -1331,55 +1241,6 @@
             font-size: 15px;
             color: var(--gray-600);
             line-height: 1.6;
-        }
-
-        /* Location Section */
-        .location {
-            padding: var(--section-padding) 0;
-            background: var(--gray-100);
-        }
-
-        .location-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .location-content h2 {
-            font-size: clamp(28px, 4vw, 48px);
-            font-weight: 700;
-            margin-bottom: 24px;
-            color: var(--black);
-        }
-
-        .location-content p {
-            font-size: 18px;
-            color: var(--gray-600);
-            line-height: 1.6;
-            margin-bottom: 48px;
-        }
-
-        .location-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-            justify-content: center;
-            margin-bottom: 48px;
-        }
-
-        .location-item {
-            background: var(--white);
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 500;
-            color: var(--gray-700);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            transition: all 0.2s var(--transition);
-        }
-
-        .location-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         /* CTA Section */
@@ -1480,7 +1341,7 @@
             flex-direction: column;
             gap: 16px;
             align-items: flex-end;
-            z-index: 998;
+            z-index: 990;
         }
 
         /* Floating Book Button */
@@ -1520,7 +1381,7 @@
             text-decoration: none;
             box-shadow: 0 4px 20px rgba(0, 102, 204, 0.3);
             transition: all 0.3s var(--transition);
-            animation: floatIn 0.6s ease-out 1s both, subtlePulse 2s infinite 1.6s;
+            animation: floatIn 0.6s ease-out 1s both;
         }
 
         .floating-call-btn::before {
@@ -1549,7 +1410,6 @@
         .floating-call-btn:hover {
             transform: scale(1.1);
             box-shadow: 0 6px 30px rgba(0, 102, 204, 0.5);
-            animation-play-state: paused;
         }
 
         .floating-call-btn svg {
@@ -1558,75 +1418,26 @@
             fill: var(--white);
         }
 
-        /* Notification Toast */
-        .notification-toast {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            background: var(--white);
-            padding: 16px 24px;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transform: translateX(-400px);
-            transition: transform 0.4s var(--transition);
-            z-index: 997;
-            max-width: 320px;
-        }
-
-        .notification-toast.show {
-            transform: translateX(0);
-        }
-
-        .notification-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--gray-100);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .notification-content {
-            flex: 1;
-        }
-
-        .notification-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--black);
-            margin-bottom: 2px;
-        }
-
-        .notification-text {
-            font-size: 13px;
-            color: var(--gray-600);
-        }
-
-        /* Animations */
+        /* Animations - Optimized */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translate3d(0, 20px, 0);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translate3d(0, 0, 0);
             }
         }
 
         @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateY(-20px);
+                transform: translate3d(0, -20px, 0);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translate3d(0, 0, 0);
             }
         }
 
@@ -1639,26 +1450,14 @@
             }
         }
 
-        @keyframes subtlePulse {
-            0% {
-                box-shadow: 0 4px 20px rgba(0, 102, 204, 0.3);
-            }
-            50% {
-                box-shadow: 0 4px 30px rgba(0, 102, 204, 0.6);
-            }
-            100% {
-                box-shadow: 0 4px 20px rgba(0, 102, 204, 0.3);
-            }
-        }
-
         @keyframes floatIn {
             0% {
                 opacity: 0;
-                transform: scale(0.5) translateY(20px);
+                transform: scale(0.5) translate3d(0, 20px, 0);
             }
             100% {
                 opacity: 1;
-                transform: scale(1) translateY(0);
+                transform: scale(1) translate3d(0, 0, 0);
             }
         }
 
@@ -1673,7 +1472,7 @@
             }
 
             .hero h1 {
-                font-size: clamp(36px, 5vw, 56px);
+                font-size: clamp(40px, 5vw, 56px);
             }
         }
 
@@ -1684,29 +1483,37 @@
                 --mobile-section-padding: 40px;
             }
 
+            /* Hide desktop navigation */
+            .header-container nav {
+                display: none !important;
+            }
+
+            .header-cta {
+                display: none !important;
+            }
+
+            /* Show mobile menu toggle */
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
             .header-container {
                 height: 64px;
                 padding: 0 16px;
             }
 
-            nav {
-                display: none;
-            }
-
-            .header-cta {
-                display: none;
-            }
-
-            .mobile-menu-toggle {
-                display: flex;
+            /* Mobile Menu Position */
+            .mobile-menu {
+                top: 64px;
             }
 
             .hero {
                 padding: 100px 0 var(--mobile-section-padding);
+                min-height: auto;
             }
 
             .hero h1 {
-                font-size: clamp(28px, 8vw, 40px);
+                font-size: clamp(32px, 8vw, 40px);
                 margin-bottom: 20px;
             }
 
@@ -1748,35 +1555,8 @@
             .cta-section,
             .discovery-form-section,
             .pricing-section,
-            .blog-section,
-            .location {
+            .social-proof {
                 padding: var(--mobile-section-padding) 0;
-            }
-
-            .blog-grid {
-                grid-template-columns: 1fr;
-                gap: 24px;
-            }
-
-            .blog-card {
-                border-radius: 8px;
-            }
-
-            .blog-card.expanded {
-                margin: 0;
-            }
-
-            .blog-cta-section {
-                padding: 32px 20px;
-                margin-top: 40px;
-            }
-
-            .blog-full-content .highlight {
-                padding: 16px;
-            }
-
-            .blog-cta-box {
-                padding: 20px;
             }
 
             .footer-content {
@@ -1795,6 +1575,10 @@
 
             .pricing-card {
                 padding: 32px 24px;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
             }
 
             .pricing-card.featured:hover {
@@ -1831,11 +1615,9 @@
                 display: none;
             }
 
-            /* Mobile notification */
-            .notification-toast {
-                left: 16px;
-                right: 16px;
-                max-width: none;
+            /* Testimonials mobile */
+            .testimonials-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -1845,7 +1627,7 @@
             }
 
             .hero h1 {
-                font-size: 28px;
+                font-size: 32px;
             }
 
             .btn {
@@ -1877,41 +1659,36 @@
                 padding: 10px 20px;
             }
 
-            .blog-content {
-                padding: 24px 20px;
-            }
-
             .trust-grid {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
 
-            .location-grid {
-                gap: 12px;
+            /* Mobile menu specific */
+            .mobile-nav-link {
+                font-size: 16px;
+                padding: 14px;
             }
 
-            .location-item {
-                padding: 10px 20px;
-                font-size: 14px;
-            }
-
-            /* Hide floating book button on very small screens */
-            .floating-book-btn {
-                display: none;
+            .mobile-nav-cta {
+                font-size: 16px;
+                padding: 14px 24px;
             }
         }
 
         /* Fade-in-up utility class */
         .fade-in-up {
             opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s var(--transition);
+            transform: translateY(30px);
+            transition: opacity 0.6s var(--transition), transform 0.6s var(--transition);
         }
 
         .fade-in-up.visible {
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Body menu open styles handled by JavaScript for better scroll position preservation */
     </style>
 </head>
 <body>
@@ -1920,13 +1697,12 @@
         <div class="header-container">
             <div class="logo">Palm Beach Websites</div>
             <nav>
-                <a href="#transformation">Why It Matters</a>
-                <a href="#portfolio">See Our Work</a>
-                <a href="#blog">Resources</a>
                 <a href="#pricing">Pricing</a>
-                <a href="#book-discovery">Book Discovery Call</a>
+                <a href="#portfolio">Our Work</a>
+                <a href="#process">How It Works</a>
+                <a href="#book-discovery">Let's Talk</a>
             </nav>
-            <a href="#book-discovery" class="header-cta">Book Free Call</a>
+            <a href="tel:5617186725" class="header-cta">Call (561) 718-6725</a>
             <button class="mobile-menu-toggle" aria-label="Menu">
                 <span></span>
                 <span></span>
@@ -1936,14 +1712,13 @@
     </header>
 
     <!-- Mobile Menu -->
-    <div class="mobile-menu">
-        <nav>
-            <a href="#transformation">Why It Matters</a>
-            <a href="#portfolio">See Our Work</a>
-            <a href="#blog">Resources</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#book-discovery">Book Discovery Call</a>
-            <a href="tel:5617186725" class="header-cta">Call Now</a>
+    <div class="mobile-menu" id="mobileMenu">
+        <nav class="mobile-nav">
+            <a href="#pricing" class="mobile-nav-link">Pricing</a>
+            <a href="#portfolio" class="mobile-nav-link">Our Work</a>
+            <a href="#process" class="mobile-nav-link">How It Works</a>
+            <a href="#book-discovery" class="mobile-nav-link">Book Discovery Call</a>
+            <a href="tel:5617186725" class="mobile-nav-cta">Call (561) 718-6725</a>
         </nav>
     </div>
 
@@ -1955,8 +1730,8 @@
                 <h1>Your Website Should Work As Hard As You Do</h1>
                 <p class="hero-subtitle">Whether you need to fix an outdated site or build your first one, we create professional websites that give you the confidence to compete—and win.</p>
                 <div class="hero-cta">
-                    <a href="#book-discovery" class="btn btn-primary">Book Your Free Discovery Call</a>
-                    <a href="#portfolio" class="btn btn-secondary">See What's Possible</a>
+                    <a href="#book-discovery" class="btn btn-primary">Book Your Free Consultation</a>
+                    <a href="#pricing" class="btn btn-secondary">See Simple Pricing</a>
                 </div>
                 <p class="cta-note">No tech talk. No confusing jargon. <a href="#process">Just results you can see →</a></p>
                 <div class="hero-trust">
@@ -1999,6 +1774,219 @@
                     <span class="trust-number">Direct</span>
                     <span class="trust-label">Communication</span>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="pricing">
+        <div class="container">
+            <div class="pricing-header">
+                <h2>Simple, Transparent Pricing</h2>
+                <p>No hidden fees. No surprises. Just honest pricing for quality work.</p>
+            </div>
+            
+            <div class="pricing-cards">
+                <div class="pricing-card fade-in-up">
+                    <h3 class="pricing-title">Single Page Website</h3>
+                    <div class="pricing-price">$350</div>
+                    <p class="pricing-description">Perfect for getting started with a professional online presence</p>
+                    
+                    <ul class="pricing-features">
+                        <li>
+                            <span class="check">✓</span>
+                            <span>Beautiful, modern single-page design</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span>Mobile-responsive on all devices</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span>SEO-optimized for search engines</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span>Contact form integration</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span>Fast loading speed (under 3 seconds)</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span><strong>Unlimited revisions</strong> until you love it</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span>30-day post-launch support</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="#book-discovery" class="btn btn-primary pricing-cta">Start Your Website Today</a>
+                </div>
+                
+                <div class="pricing-card featured fade-in-up">
+                    <span class="pricing-badge">Most Popular</span>
+                    <h3 class="pricing-title">Multi-Page Website</h3>
+                    <div class="pricing-price">$1,250<span> starting</span></div>
+                    <p class="pricing-description">Full website for businesses ready to compete professionally</p>
+                    
+                    <ul class="pricing-features">
+                        <li>
+                            <span class="check">✓</span>
+                            <span>Up to 5 professionally designed pages</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span>Custom design matched to your brand</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span>Advanced SEO implementation</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span>Google Analytics & tracking setup</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span>Blog or news section (optional)</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span><strong>Unlimited revisions</strong> until perfect</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span>60-day post-launch support</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="#book-discovery" class="btn btn-accent pricing-cta">Book Your Free Consultation</a>
+                </div>
+                
+                <div class="pricing-card fade-in-up">
+                    <h3 class="pricing-title">Custom Solution</h3>
+                    <div class="pricing-price">Let's Talk</div>
+                    <p class="pricing-description">For unique requirements or larger projects</p>
+                    
+                    <ul class="pricing-features">
+                        <li>
+                            <span class="check">✓</span>
+                            <span>E-commerce functionality</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span>Custom web applications</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span>Database integration</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span>API connections</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span>Advanced functionality</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span><strong>Unlimited revisions</strong> included</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span>Extended support options</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="#book-discovery" class="btn btn-primary pricing-cta">Discuss Your Project</a>
+                </div>
+            </div>
+            
+            <div class="guarantee-section">
+                <div class="container">
+                    <div class="guarantee-content">
+                        <div class="guarantee-badge">
+                            <span>🛡️</span>
+                            <span>100% Satisfaction Guarantee</span>
+                        </div>
+                        <h3 class="guarantee-title">Your Success Is Our Only Goal</h3>
+                        <p class="guarantee-text">
+                            We stand behind every website we build. If you're not completely thrilled with your new website, we'll work with you until you are—or you'll get your money back. No questions asked. That's how confident we are in delivering results you'll love.
+                        </p>
+                        <a href="#book-discovery" class="btn btn-accent">Start Risk-Free Today</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="social-proof">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Clients Say</h2>
+                <p>Real businesses. Real results. Real testimonials.</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card fade-in-up">
+                    <div class="rating">★★★★★</div>
+                    <p class="testimonial-text">
+                        "Finally, a website I'm proud to share! Zachary took my outdated site and transformed it into something that actually brings in customers. Best investment I've made this year."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MR</div>
+                        <div class="author-info">
+                            <h4>Michael Rodriguez</h4>
+                            <p>Rodriguez Landscaping, West Palm Beach</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card fade-in-up">
+                    <div class="rating">★★★★★</div>
+                    <p class="testimonial-text">
+                        "I was nervous about getting my first website, but the process was so simple. No confusing tech talk, just clear communication and amazing results. Highly recommend!"
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">ST</div>
+                        <div class="author-info">
+                            <h4>Sarah Thompson</h4>
+                            <p>Coastal Wellness Studio, Jupiter</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card fade-in-up">
+                    <div class="rating">★★★★★</div>
+                    <p class="testimonial-text">
+                        "The unlimited revisions promise is real. We went through several iterations until it was perfect. Now our website converts visitors into clients consistently."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JW</div>
+                        <div class="author-info">
+                            <h4>James Williams</h4>
+                            <p>Williams Law Group, Wellington</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem-section">
+        <div class="container">
+            <div class="problem-content">
+                <h2>Let's Be Honest About Your Online Presence</h2>
+                <p><strong>Have a website?</strong> You know that feeling when a potential customer mentions they "checked it out"? That slight cringe? The quick explanation about how you've been meaning to update it?</p>
+                <p><strong>No website yet?</strong> You're tired of saying "I'm working on it" or watching customers choose competitors simply because they look more established online.</p>
+                <p style="font-size: 22px; font-weight: 500;">Either way, your business deserves better. You deserve to feel confident every time someone googles you.</p>
+                <a href="#book-discovery" class="btn btn-accent" style="margin-top: 32px;">Let's Fix This Together</a>
             </div>
         </div>
     </section>
@@ -2079,19 +2067,6 @@
                         <small style="color: rgba(255,255,255,0.6);">We typically respond within 2-4 hours during business hours.</small>
                     </p>
                 </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Problem Section -->
-    <section class="problem-section">
-        <div class="container">
-            <div class="problem-content">
-                <h2>Let's Be Honest About Your Online Presence</h2>
-                <p><strong>Have a website?</strong> You know that feeling when a potential customer mentions they "checked it out"? That slight cringe? The quick explanation about how you've been meaning to update it?</p>
-                <p><strong>No website yet?</strong> You're tired of saying "I'm working on it" or watching customers choose competitors simply because they look more established online.</p>
-                <p style="font-size: 22px; font-weight: 500;">Either way, your business deserves better. You deserve to feel confident every time someone googles you.</p>
-                <a href="#book-discovery" class="btn btn-accent" style="margin-top: 32px;">Let's Fix This Together</a>
             </div>
         </div>
     </section>
@@ -2239,441 +2214,6 @@
                         <a href="#book-discovery" class="portfolio-cta">Build Your Authority →</a>
                     </div>
                 </div>
-                
-                <div class="portfolio-item fade-in-up">
-                    <div class="portfolio-image-container" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); position: relative; display: flex; align-items: center; justify-content: center;">
-                        <div style="text-align: center; color: white;">
-                            <div style="width: 80px; height: 80px; background: rgba(255,255,255,0.2); border-radius: 12px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;">
-                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                                    <circle cx="12" cy="10" r="3"/>
-                                </svg>
-                            </div>
-                            <h4 style="font-size: 20px; font-weight: 600; margin-bottom: 8px;">Local Business</h4>
-                            <p style="font-size: 14px; opacity: 0.8;">Community Focused</p>
-                        </div>
-                    </div>
-                    <div class="portfolio-content">
-                        <h3 class="portfolio-title">Local Business</h3>
-                        <p class="portfolio-description">Connect with your community. Show up in local searches. Built for businesses that serve their neighbors and need to be found.</p>
-                        <a href="#book-discovery" class="portfolio-cta">Get Found Locally →</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Blog Section -->
-    <section class="blog-section" id="blog">
-        <div class="container">
-            <div class="blog-header">
-                <h2>Website Tips & Business Growth</h2>
-                <p>Practical advice to help your business succeed online in Palm Beach County and beyond</p>
-            </div>
-            
-            <div class="blog-grid">
-                <article class="blog-card fade-in-up" data-blog="1">
-                    <div class="blog-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                        <span class="blog-category">Local SEO</span>
-                    </div>
-                    <div class="blog-content">
-                        <time class="blog-date">January 2025</time>
-                        <h3 class="blog-title">5 Ways West Palm Beach Businesses Can Dominate Local Search</h3>
-                        <p class="blog-excerpt">
-                            Learn how to optimize your website for "near me" searches, Google Maps, and local directories. These proven strategies help Palm Beach County businesses get found by customers in their area.
-                        </p>
-                        <button class="blog-toggle" aria-label="Read full article">
-                            <span>Read Full Article</span>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </button>
-                        
-                        <div class="blog-full-content">
-                            <p>
-                                If you're a business owner in West Palm Beach, Wellington, or anywhere in Palm Beach County, showing up in local search results isn't optional—it's essential. Here's how to make sure your business appears when potential customers are looking for what you offer.
-                            </p>
-                            
-                            <h4>1. Claim and Optimize Your Google Business Profile</h4>
-                            <p>
-                                Your Google Business Profile (formerly Google My Business) is your most powerful local SEO tool. It's free, and it's what makes you appear in "near me" searches and Google Maps.
-                            </p>
-                            <ul>
-                                <li>Verify your business location</li>
-                                <li>Add high-quality photos (storefront, products, team)</li>
-                                <li>Keep hours updated, especially for holidays</li>
-                                <li>Respond to reviews within 24-48 hours</li>
-                                <li>Post weekly updates about offers or events</li>
-                            </ul>
-                            
-                            <h4>2. Target Location-Based Keywords</h4>
-                            <p>
-                                Instead of competing for generic terms like "plumber," focus on "plumber in West Palm Beach" or "emergency plumbing Wellington FL." These longer, location-specific keywords are easier to rank for and bring more qualified leads.
-                            </p>
-                            
-                            <div class="highlight">
-                                <strong>Pro Tip:</strong> Include neighborhood names too. "Royal Palm Beach dentist" or "Jupiter hair salon" can capture hyper-local searches.
-                            </div>
-                            
-                            <h4>3. Build Local Citations</h4>
-                            <p>
-                                Citations are mentions of your business name, address, and phone number (NAP) on other websites. Consistency is key—make sure your information is identical everywhere.
-                            </p>
-                            <ul>
-                                <li>Yelp, Facebook, and industry directories</li>
-                                <li>Chamber of Commerce listings</li>
-                                <li>Local business associations</li>
-                                <li>Palm Beach County business directories</li>
-                            </ul>
-                            
-                            <h4>4. Create Location-Specific Content</h4>
-                            <p>
-                                Write about local events, sponsor community activities, or create guides relevant to your area. "Best Coffee Shops Near CityPlace" or "Preparing Your West Palm Beach Home for Hurricane Season" shows search engines you're truly local.
-                            </p>
-                            
-                            <h4>5. Mobile Optimization Is Non-Negotiable</h4>
-                            <p>
-                                Over 76% of people who search for something nearby on their smartphone visit a related business within 24 hours. If your site isn't mobile-friendly, you're literally turning away customers at your digital door.
-                            </p>
-                            
-                            <div class="blog-cta-box">
-                                <h5>Ready to Dominate Local Search?</h5>
-                                <p>We specialize in creating websites that Palm Beach County customers can actually find.</p>
-                                <a href="#book-discovery" class="btn btn-accent">Get Your Local SEO Strategy</a>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="blog-card fade-in-up" data-blog="2">
-                    <div class="blog-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                        <span class="blog-category">Web Design</span>
-                    </div>
-                    <div class="blog-content">
-                        <time class="blog-date">December 2024</time>
-                        <h3 class="blog-title">Why Your Florida Business Needs a Mobile-First Website in 2025</h3>
-                        <p class="blog-excerpt">
-                            With 70% of local searches happening on mobile devices, your website must deliver a flawless mobile experience. Discover what mobile-first really means and why it matters for your bottom line.
-                        </p>
-                        <button class="blog-toggle" aria-label="Read full article">
-                            <span>Read Full Article</span>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </button>
-                        
-                        <div class="blog-full-content">
-                            <p>
-                                Picture this: A potential customer in downtown West Palm Beach searches for your service on their phone. They click your website, and... it's a desktop site crammed onto a tiny screen. Pinching, zooming, squinting. Within seconds, they hit the back button and call your competitor instead.
-                            </p>
-                            
-                            <h4>The Mobile Reality Check</h4>
-                            <p>
-                                Here in South Florida, where people are always on the go—from the beach to business meetings—mobile browsing dominates. Recent data shows:
-                            </p>
-                            <ul>
-                                <li>70% of local searches happen on mobile devices</li>
-                                <li>53% of mobile users abandon sites that take over 3 seconds to load</li>
-                                <li>88% of consumers who search for a local business on mobile call or visit within 24 hours</li>
-                            </ul>
-                            
-                            <h4>What Mobile-First Actually Means</h4>
-                            <p>
-                                Mobile-first isn't about shrinking your desktop site. It's about designing for mobile users from the start, then expanding for larger screens. This approach ensures the best experience for the majority of your visitors.
-                            </p>
-                            
-                            <div class="highlight">
-                                <strong>Key Mobile-First Features:</strong><br>
-                                • Thumb-friendly navigation<br>
-                                • Click-to-call buttons<br>
-                                • Simplified forms<br>
-                                • Fast-loading images<br>
-                                • Easy-to-read text without zooming
-                            </div>
-                            
-                            <h4>The Business Impact</h4>
-                            <p>
-                                A mobile-first website isn't just about looking modern—it directly impacts your bottom line:
-                            </p>
-                            <ul>
-                                <li><strong>Higher conversions:</strong> Mobile-optimized sites see 5x higher conversion rates</li>
-                                <li><strong>Better SEO:</strong> Google uses mobile-first indexing, meaning it primarily looks at your mobile site for rankings</li>
-                                <li><strong>Increased trust:</strong> Professional mobile experience = professional business</li>
-                                <li><strong>Competitive advantage:</strong> Many Florida businesses still have outdated mobile sites</li>
-                            </ul>
-                            
-                            <h4>Testing Your Mobile Experience</h4>
-                            <p>
-                                Pull out your phone right now and visit your website. Can you easily:
-                            </p>
-                            <ul>
-                                <li>Find your phone number and tap to call?</li>
-                                <li>Navigate without zooming?</li>
-                                <li>Fill out a contact form with one hand?</li>
-                                <li>Load pages in under 3 seconds?</li>
-                            </ul>
-                            
-                            <p>
-                                If you answered "no" to any of these, you're losing customers to competitors with better mobile experiences.
-                            </p>
-                            
-                            <div class="blog-cta-box">
-                                <h5>Is Your Website Driving Customers Away?</h5>
-                                <p>Let's build a mobile-first website that converts visitors into customers.</p>
-                                <a href="#book-discovery" class="btn btn-accent">Get Your Free Mobile Audit</a>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="blog-card fade-in-up" data-blog="3">
-                    <div class="blog-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-                        <span class="blog-category">Business Growth</span>
-                    </div>
-                    <div class="blog-content">
-                        <time class="blog-date">December 2024</time>
-                        <h3 class="blog-title">From Zero to Hero: Building Your First Business Website (Without the Stress)</h3>
-                        <p class="blog-excerpt">
-                            Starting from scratch doesn't have to be overwhelming. This guide walks through everything you need to know about creating your first professional website, from choosing a domain to going live.
-                        </p>
-                        <button class="blog-toggle" aria-label="Read full article">
-                            <span>Read Full Article</span>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </button>
-                        
-                        <div class="blog-full-content">
-                            <p>
-                                So you've decided it's time for a website. Maybe you've been putting it off, worried about the complexity, the cost, or simply not knowing where to start. Take a deep breath—creating your first business website is easier than you think when you have the right roadmap.
-                            </p>
-                            
-                            <h4>Step 1: Define Your Website's Purpose</h4>
-                            <p>
-                                Before anything else, be crystal clear about what you want your website to achieve:
-                            </p>
-                            <ul>
-                                <li><strong>Generate leads?</strong> Focus on contact forms and calls-to-action</li>
-                                <li><strong>Sell products?</strong> You'll need e-commerce functionality</li>
-                                <li><strong>Build credibility?</strong> Showcase your work and testimonials</li>
-                                <li><strong>Provide information?</strong> Organize content for easy navigation</li>
-                            </ul>
-                            
-                            <h4>Step 2: Choose Your Domain Name</h4>
-                            <p>
-                                Your domain is your digital address. Keep it:
-                            </p>
-                            <ul>
-                                <li>Short and memorable</li>
-                                <li>Easy to spell and pronounce</li>
-                                <li>Related to your business name</li>
-                                <li>.com if possible (people assume .com)</li>
-                            </ul>
-                            
-                            <div class="highlight">
-                                <strong>Budget Alert:</strong> Domains cost $10-15/year. Hosting runs $5-25/month. That's less than your monthly coffee budget for a 24/7 salesperson!
-                            </div>
-                            
-                            <h4>Step 3: Plan Your Content</h4>
-                            <p>
-                                Most small business websites need these essential pages:
-                            </p>
-                            <ul>
-                                <li><strong>Home:</strong> Clear value proposition and what you do</li>
-                                <li><strong>About:</strong> Your story and why customers should trust you</li>
-                                <li><strong>Services/Products:</strong> What you offer with clear pricing (if applicable)</li>
-                                <li><strong>Contact:</strong> Multiple ways to reach you</li>
-                                <li><strong>Testimonials:</strong> Social proof from happy customers</li>
-                            </ul>
-                            
-                            <h4>Step 4: Design for Your Customers</h4>
-                            <p>
-                                Your website isn't for you—it's for your customers. Consider:
-                            </p>
-                            <ul>
-                                <li>What questions do they have?</li>
-                                <li>What problems need solving?</li>
-                                <li>What would make them choose you?</li>
-                                <li>How can you make their decision easy?</li>
-                            </ul>
-                            
-                            <h4>Step 5: Launch and Learn</h4>
-                            <p>
-                                Perfect is the enemy of done. Your first website doesn't need to be perfect—it needs to exist. You can always improve it later. The important thing is to start connecting with customers online.
-                            </p>
-                            
-                            <h4>Common First Website Mistakes to Avoid</h4>
-                            <ul>
-                                <li><strong>Too much text:</strong> People scan, they don't read novels</li>
-                                <li><strong>Hidden contact info:</strong> Make it easy to reach you</li>
-                                <li><strong>Stock photos of strangers:</strong> Use real photos of your business</li>
-                                <li><strong>Ignoring mobile:</strong> Test on phones before launching</li>
-                                <li><strong>No clear next step:</strong> Tell visitors what to do</li>
-                            </ul>
-                            
-                            <div class="blog-cta-box">
-                                <h5>Ready to Build Your First Website?</h5>
-                                <p>Skip the learning curve. We'll build your professional website for just $350 with unlimited revisions.</p>
-                                <a href="#pricing" class="btn btn-accent">See Our Simple Pricing</a>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-            </div>
-            
-            <div class="blog-cta-section">
-                <h3>Ready to Put These Tips Into Action?</h3>
-                <p>Let's build a website that actually drives results for your business.</p>
-                <a href="#book-discovery" class="btn btn-primary">Get Your Free Website Strategy Call</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section class="pricing-section" id="pricing">
-        <div class="container">
-            <div class="pricing-header">
-                <h2>Simple, Transparent Pricing</h2>
-                <p>No hidden fees. No surprises. Just honest pricing for quality work.</p>
-                <p style="margin-top: 16px; font-size: 16px; color: var(--accent); font-weight: 500;">
-                    
-                </p>
-            </div>
-            
-            <div class="pricing-cards">
-                <div class="pricing-card fade-in-up">
-                    <h3 class="pricing-title">Single Page Website</h3>
-                    <div class="pricing-price">$350</div>
-                    <p class="pricing-description">Perfect for getting started with a professional online presence</p>
-                    
-                    <ul class="pricing-features">
-                        <li>
-                            <span class="check">✓</span>
-                            <span>Beautiful, modern single-page design</span>
-                        </li>
-                        <li>
-                            <span class="check">✓</span>
-                            <span>Mobile-responsive on all devices</span>
-                        </li>
-                        <li>
-                            <span class="check">✓</span>
-                            <span>SEO-optimized for search engines</span>
-                        </li>
-                        <li>
-                            <span class="check">✓</span>
-                            <span>Contact form integration</span>
-                        </li>
-                        <li>
-                            <span class="check">✓</span>
-                            <span>Fast loading speed (under 3 seconds)</span>
-                        </li>
-                        <li>
-                            <span class="check">✓</span>
-                            <span><strong>Unlimited revisions</strong> until you love it</span>
-                        </li>
-                        <li>
-                            <span class="check">✓</span>
-                            <span>30-day post-launch support</span>
-                        </li>
-                    </ul>
-                    
-                    <a href="#book-discovery" class="btn btn-primary pricing-cta">Start Your Website Today</a>
-                </div>
-                
-                <div class="pricing-card featured fade-in-up">
-                    <span class="pricing-badge">Most Popular</span>
-                    <h3 class="pricing-title">Multi-Page Website</h3>
-                    <div class="pricing-price">$1,250<span> starting</span></div>
-                    <p class="pricing-description">Full website for businesses ready to compete professionally</p>
-                    
-                    <ul class="pricing-features">
-                        <li>
-                            <span class="check">✓</span>
-                            <span>Up to 5 professionally designed pages</span>
-                        </li>
-                        <li>
-                            <span class="check">✓</span>
-                            <span>Custom design matched to your brand</span>
-                        </li>
-                        <li>
-                            <span class="check">✓</span>
-                            <span>Advanced SEO implementation</span>
-                        </li>
-                        <li>
-                            <span class="check">✓</span>
-                            <span>Google Analytics & tracking setup</span>
-                        </li>
-                        <li>
-                            <span class="check">✓</span>
-                            <span>Blog or news section (optional)</span>
-                        </li>
-                        <li>
-                            <span class="check">✓</span>
-                            <span><strong>Unlimited revisions</strong> until perfect</span>
-                        </li>
-                        <li>
-                            <span class="check">✓</span>
-                            <span>60-day post-launch support</span>
-                        </li>
-                    </ul>
-                    
-                    <a href="#book-discovery" class="btn btn-accent pricing-cta">Book Your Free Consultation</a>
-                </div>
-                
-                <div class="pricing-card fade-in-up">
-                    <h3 class="pricing-title">Custom Solution</h3>
-                    <div class="pricing-price">Let's Talk</div>
-                    <p class="pricing-description">For unique requirements or larger projects</p>
-                    
-                    <ul class="pricing-features">
-                        <li>
-                            <span class="check">✓</span>
-                            <span>E-commerce functionality</span>
-                        </li>
-                        <li>
-                            <span class="check">✓</span>
-                            <span>Custom web applications</span>
-                        </li>
-                        <li>
-                            <span class="check">✓</span>
-                            <span>Database integration</span>
-                        </li>
-                        <li>
-                            <span class="check">✓</span>
-                            <span>API connections</span>
-                        </li>
-                        <li>
-                            <span class="check">✓</span>
-                            <span>Advanced functionality</span>
-                        </li>
-                        <li>
-                            <span class="check">✓</span>
-                            <span><strong>Unlimited revisions</strong> included</span>
-                        </li>
-                        <li>
-                            <span class="check">✓</span>
-                            <span>Extended support options</span>
-                        </li>
-                    </ul>
-                    
-                    <a href="#book-discovery" class="btn btn-primary pricing-cta">Discuss Your Project</a>
-                </div>
-            </div>
-            
-            <div class="guarantee-section">
-                <div class="container">
-                    <div class="guarantee-content">
-                        <div class="guarantee-badge">
-                            <span>🛡️</span>
-                            <span>100% Satisfaction Guarantee</span>
-                        </div>
-                        <h3 class="guarantee-title">Your Success Is Our Only Goal</h3>
-                        <p class="guarantee-text">
-                            We stand behind every website we build. If you're not completely thrilled with your new website, we'll work with you until you are—or you'll get your money back. No questions asked. That's how confident we are in delivering results you'll love.
-                        </p>
-                        <a href="#book-discovery" class="btn btn-accent">Start Risk-Free Today</a>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -2714,33 +2254,6 @@
             
             <div style="text-align: center; margin-top: 48px;">
                 <a href="#book-discovery" class="btn btn-primary">Start Your Project Today</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Location Section -->
-    <section class="location">
-        <div class="container">
-            <div class="location-content">
-                <h2>Based in West Palm Beach. Working With Businesses Everywhere.</h2>
-                <p>
-                    We're proud to serve our local Palm Beach County community with in-person consultations and the understanding that comes from being neighbors. But great websites know no borders—we work with ambitious businesses across the country who value quality and personal service.
-                </p>
-                
-                <div class="location-grid">
-                    <div class="location-item">West Palm Beach</div>
-                    <div class="location-item">Wellington</div>
-                    <div class="location-item">Royal Palm Beach</div>
-                    <div class="location-item">Jupiter</div>
-                    <div class="location-item">The Acreage</div>
-                    <div class="location-item">Loxahatchee</div>
-                    <div class="location-item">& Beyond</div>
-                </div>
-                
-                <p style="margin-top: 32px; font-size: 16px;">
-                    <strong>Local?</strong> Let's meet for coffee.<br>
-                    <strong>Not local?</strong> Let's build something great together anyway.
-                </p>
             </div>
         </div>
     </section>
@@ -2794,171 +2307,228 @@
             </svg>
         </a>
     </div>
-    
-    <!-- Notification Toast -->
-    <div class="notification-toast" id="notificationToast">
-        <div class="notification-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
-                <path d="M12 6v6l4 2"/>
-            </svg>
-        </div>
-        <div class="notification-content">
-            <div class="notification-title" id="notificationTitle">New Project Started</div>
-            <div class="notification-text" id="notificationText">We don’t just build websites. We build confidence.</div>
-        </div>
-    </div>
 
     <script>
-        // Intersection Observer for fade-in animations
+        // Optimized Intersection Observer for consistent animations
+        const isMobile = window.innerWidth <= 768;
         const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            threshold: 0.05, // Very low threshold for early triggering
+            rootMargin: '50px 0px' // Positive margin to trigger before element is visible
         };
 
-        const observer = new IntersectionObserver(function(entries) {
+        const animationObserver = new IntersectionObserver(function(entries) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
+                    // Add visible class immediately
                     entry.target.classList.add('visible');
+                    // Stop observing after animation
+                    animationObserver.unobserve(entry.target);
                 }
             });
         }, observerOptions);
 
-        // Observe all fade-in elements
-        document.querySelectorAll('.fade-in-up, .transformation-card, .service-card, .portfolio-item, .process-step, .pricing-card, .blog-card').forEach(el => {
-            observer.observe(el);
+        // Observe all animated elements
+        const animatedElements = document.querySelectorAll('.fade-in-up, .transformation-card, .service-card, .portfolio-item, .process-step, .pricing-card, .testimonial-card');
+        animatedElements.forEach(el => {
+            animationObserver.observe(el);
         });
 
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href === '#' || !href) return;
-                
-                e.preventDefault();
-                const target = document.querySelector(href);
-                if (target) {
-                    const offsetTop = target.offsetTop - 80;
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    const mobileMenu = document.querySelector('.mobile-menu');
-                    const mobileToggle = document.querySelector('.mobile-menu-toggle');
-                    if (mobileMenu && mobileToggle) {
-                        mobileMenu.classList.remove('active');
-                        mobileToggle.classList.remove('active');
-                    }
-                }
-            });
-        });
-
-        // Blog toggle functionality
-        document.querySelectorAll('.blog-toggle').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                const card = this.closest('.blog-card');
-                const isExpanded = card.classList.contains('expanded');
-                
-                // Close all other expanded cards
-                document.querySelectorAll('.blog-card.expanded').forEach(expandedCard => {
-                    if (expandedCard !== card) {
-                        expandedCard.classList.remove('expanded');
-                        expandedCard.querySelector('.blog-toggle span').textContent = 'Read Full Article';
-                    }
+        // Smooth scroll for anchor links using event delegation
+        document.addEventListener('click', function(e) {
+            const link = e.target.closest('a[href^="#"]');
+            if (!link) return;
+            
+            const href = link.getAttribute('href');
+            if (href === '#' || !href) return;
+            
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+                const offsetTop = target.offsetTop - 80;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
                 });
                 
-                // Toggle current card
-                card.classList.toggle('expanded');
-                
-                // Update button text
-                if (isExpanded) {
-                    this.querySelector('span').textContent = 'Read Full Article';
-                } else {
-                    this.querySelector('span').textContent = 'Close Article';
-                    // Smooth scroll to card
-                    setTimeout(() => {
-                        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                    }, 100);
+                // Close mobile menu if open
+                const mobileMenu = document.querySelector('.mobile-menu');
+                const mobileToggle = document.querySelector('.mobile-menu-toggle');
+                if (mobileMenu && mobileToggle && mobileMenu.classList.contains('active')) {
+                    mobileMenu.classList.remove('active');
+                    mobileToggle.classList.remove('active');
+                    document.body.classList.remove('menu-open');
                 }
-            });
+            }
         });
 
-        // Handle CTA buttons within blog posts
-        document.querySelectorAll('.blog-cta-box a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                // Let the smooth scroll handler take care of it
-                const href = this.getAttribute('href');
-                if (href && href.startsWith('#')) {
-                    // Close the blog post
-                    const card = this.closest('.blog-card');
-                    if (card) {
-                        card.classList.remove('expanded');
-                        card.querySelector('.blog-toggle span').textContent = 'Read Full Article';
-                    }
+        // Optimized scroll handling with throttle
+        function throttle(func, limit) {
+            let inThrottle;
+            return function() {
+                const args = arguments;
+                const context = this;
+                if (!inThrottle) {
+                    func.apply(context, args);
+                    inThrottle = true;
+                    setTimeout(() => inThrottle = false, limit);
                 }
-            });
-        });
-
-        // Header background on scroll
-        let lastScroll = 0;
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            const header = document.querySelector('header');
-            
-            if (currentScroll > 100) {
+            }
+        }
+        
+        // Header background on scroll - optimized
+        const header = document.querySelector('header');
+        const updateHeader = throttle(() => {
+            if (window.pageYOffset > 100) {
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
             }
-            
-            lastScroll = currentScroll;
-        });
+        }, 100);
+        
+        window.addEventListener('scroll', updateHeader, { passive: true });
 
-        // Mobile menu toggle
+        // Mobile menu toggle - FIXED
         const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
         const mobileMenu = document.querySelector('.mobile-menu');
+        const body = document.body;
         
-        mobileMenuToggle.addEventListener('click', () => {
-            mobileMenuToggle.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-            
-            // Prevent body scroll when menu is open
-            if (mobileMenu.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = '';
+        if (mobileMenuToggle && mobileMenu) {
+            // Toggle menu function
+            function toggleMenu(open) {
+                if (open === undefined) {
+                    open = !mobileMenu.classList.contains('active');
+                }
+                
+                if (open) {
+                    mobileMenuToggle.classList.add('active');
+                    mobileMenu.classList.add('active');
+                    body.classList.add('menu-open');
+                    // Save scroll position
+                    const scrollY = window.scrollY;
+                    body.style.position = 'fixed';
+                    body.style.top = `-${scrollY}px`;
+                    body.style.width = '100%';
+                } else {
+                    mobileMenuToggle.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    body.classList.remove('menu-open');
+                    // Restore scroll position
+                    const scrollY = body.style.top;
+                    body.style.position = '';
+                    body.style.top = '';
+                    body.style.width = '';
+                    if (scrollY) {
+                        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+                    }
+                }
             }
-        });
+            
+            // Toggle button click
+            mobileMenuToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleMenu();
+            });
 
-        // Form handling with validation
+            // Close menu when clicking on links
+            const mobileLinks = mobileMenu.querySelectorAll('.mobile-nav-link, .mobile-nav-cta');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    toggleMenu(false);
+                });
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (mobileMenu.classList.contains('active') && 
+                    !mobileMenu.contains(e.target) && 
+                    !mobileMenuToggle.contains(e.target)) {
+                    toggleMenu(false);
+                }
+            });
+            
+            // Close menu on escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                    toggleMenu(false);
+                }
+            });
+        }
+
+        // Form handling with improved error handling
         const discoveryForm = document.getElementById('discoveryForm');
         const formSuccess = document.getElementById('formSuccess');
         
         if (discoveryForm) {
+            // Safe localStorage handling
+            const safeLocalStorage = {
+                getItem: (key) => {
+                    try {
+                        return localStorage.getItem(key);
+                    } catch (e) {
+                        return null;
+                    }
+                },
+                setItem: (key, value) => {
+                    try {
+                        localStorage.setItem(key, value);
+                    } catch (e) {
+                        // Silently fail
+                    }
+                },
+                removeItem: (key) => {
+                    try {
+                        localStorage.removeItem(key);
+                    } catch (e) {
+                        // Silently fail
+                    }
+                }
+            };
+            
+            // Save form data to localStorage as user types
+            const formInputs = discoveryForm.querySelectorAll('input, select, textarea');
+            formInputs.forEach(input => {
+                // Load saved data
+                const savedValue = safeLocalStorage.getItem(`form_${input.name}`);
+                if (savedValue) {
+                    input.value = savedValue;
+                }
+                
+                // Save on input with debounce
+                let saveTimeout;
+                input.addEventListener('input', () => {
+                    clearTimeout(saveTimeout);
+                    saveTimeout = setTimeout(() => {
+                        safeLocalStorage.setItem(`form_${input.name}`, input.value);
+                    }, 500);
+                });
+            });
+            
             // Add real-time validation
             const emailInput = discoveryForm.querySelector('#email');
             const phoneInput = discoveryForm.querySelector('#phone');
             
-            emailInput.addEventListener('blur', function() {
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(this.value)) {
-                    this.style.borderColor = 'var(--error)';
-                } else {
-                    this.style.borderColor = '';
-                }
-            });
+            if (emailInput) {
+                emailInput.addEventListener('blur', function() {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (this.value && !emailRegex.test(this.value)) {
+                        this.style.borderColor = 'var(--error)';
+                    } else {
+                        this.style.borderColor = '';
+                    }
+                });
+            }
             
-            phoneInput.addEventListener('blur', function() {
-                const phoneRegex = /^[\d\s\-\(\)]+$/;
-                if (!phoneRegex.test(this.value) || this.value.length < 10) {
-                    this.style.borderColor = 'var(--error)';
-                } else {
-                    this.style.borderColor = '';
-                }
-            });
+            if (phoneInput) {
+                phoneInput.addEventListener('blur', function() {
+                    const phoneRegex = /^[\d\s\-\(\)]+$/;
+                    if (this.value && (!phoneRegex.test(this.value) || this.value.length < 10)) {
+                        this.style.borderColor = 'var(--error)';
+                    } else {
+                        this.style.borderColor = '';
+                    }
+                });
+            }
             
             discoveryForm.addEventListener('submit', function(e) {
                 e.preventDefault();
@@ -2977,7 +2547,10 @@
                 });
                 
                 if (!isValid) {
-                    alert('Please fill in all required fields.');
+                    const firstError = discoveryForm.querySelector('[style*="var(--error)"]');
+                    if (firstError) {
+                        firstError.focus();
+                    }
                     return;
                 }
                 
@@ -2990,7 +2563,16 @@
                     headers: { "Content-Type": "application/x-www-form-urlencoded" },
                     body: new URLSearchParams(formData).toString()
                 })
-                .then(() => {
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    
+                    // Clear saved form data
+                    formInputs.forEach(input => {
+                        safeLocalStorage.removeItem(`form_${input.name}`);
+                    });
+                    
                     // Show success message
                     formSuccess.classList.add('show');
                     discoveryForm.reset();
@@ -3012,30 +2594,97 @@
                     }, 10000);
                 })
                 .catch((error) => {
-                    alert('There was an error submitting the form. Please try again or call us directly at (561) 718-6725.');
-                    console.error('Error:', error);
+                    // Show user-friendly error message
+                    const errorMsg = 'We\'re having trouble submitting your form. Please call us directly at (561) 718-6725 or try again later.';
+                    const firstInput = discoveryForm.querySelector('input');
+                    if (firstInput) {
+                        firstInput.setCustomValidity(errorMsg);
+                        firstInput.reportValidity();
+                        setTimeout(() => {
+                            firstInput.setCustomValidity('');
+                        }, 5000);
+                    } else {
+                        alert(errorMsg);
+                    }
                 });
             });
         }
         
-        // Show notification toast after delay
-       setTimeout(() => {
-    const toast = document.getElementById('notificationToast');
-    const notifications = [
-      { title: 'New Project Started', text: 'Most businesses lose leads due to outdated websites—ours don’t.' },
-      { title: 'Client Update', text: 'Clients expect modern, fast experiences. We’re making sure they get it.' },
-      { title: 'Just Launched', text: 'A slow or unclear site costs trust. This one builds it from the first click.' }
-    ];
-    const randomNotification = notifications[Math.floor(Math.random() * notifications.length)];
-    document.getElementById('notificationTitle').textContent = randomNotification.title;
-    document.getElementById('notificationText').textContent = randomNotification.text;
-
-    toast.classList.add('show');
-
-    setTimeout(() => {
-        toast.classList.remove('show');
-    }, 5000);
-}, 8000);
+        // Track scroll depth
+        let maxScroll = 0;
+        let scrollTicking = false;
+        const scrollMilestones = [25, 50, 75, 90];
+        const trackedMilestones = new Set();
+        
+        function trackScrollDepth() {
+            const scrollPercentage = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+            
+            if (scrollPercentage > maxScroll) {
+                maxScroll = scrollPercentage;
+                
+                // Track milestones
+                scrollMilestones.forEach(milestone => {
+                    if (maxScroll >= milestone && !trackedMilestones.has(milestone)) {
+                        trackedMilestones.add(milestone);
+                        if (typeof gtag !== 'undefined') {
+                            gtag('event', 'scroll_depth', {
+                                'event_category': 'engagement',
+                                'event_label': `${milestone}%`
+                            });
+                        }
+                    }
+                });
+            }
+            scrollTicking = false;
+        }
+        
+        window.addEventListener('scroll', () => {
+            if (!scrollTicking) {
+                window.requestAnimationFrame(trackScrollDepth);
+                scrollTicking = true;
+            }
+        }, { passive: true });
+        
+        // Performance tracking
+        window.addEventListener('load', () => {
+            if ('performance' in window && performance.timing) {
+                const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+                
+                if (typeof gtag !== 'undefined' && loadTime > 0) {
+                    gtag('event', 'timing_complete', {
+                        'name': 'load',
+                        'value': loadTime,
+                        'event_category': 'performance'
+                    });
+                }
+            }
+        });
+        
+        // Debounce function for better performance
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+        
+        // Handle resize events efficiently
+        let currentIsMobile = window.innerWidth <= 768;
+        const handleResize = debounce(() => {
+            const newIsMobile = window.innerWidth <= 768;
+            // Only update if crossing mobile/desktop boundary
+            if (newIsMobile !== currentIsMobile) {
+                currentIsMobile = newIsMobile;
+                // You could update animation thresholds here if needed
+            }
+        }, 250);
+        
+        window.addEventListener('resize', handleResize, { passive: true });
     </script>
 </body>
 </html>
